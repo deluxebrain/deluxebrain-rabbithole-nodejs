@@ -7,6 +7,7 @@ ARG VERSION
 
 WORKDIR /tmp/package
 
+# hadolint ignore=DL4006
 RUN curl -sf https://gobinaries.com/tj/node-prune | sh
 
 ADD ${APP_NAME}-${VERSION}.tgz /tmp
