@@ -1,0 +1,13 @@
+src/
+test/
+.editorconfig
+.eslintignore
+.eslintrc.json
+.gitignore
+.node-version
+.npmignore
+.prettierrc
+Dockerfile
+Makefile
+nodemon.json
+*.tgz

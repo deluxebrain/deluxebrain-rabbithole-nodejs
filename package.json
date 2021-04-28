@@ -1,0 +1,60 @@
+{
+  "name": "foo",
+  "version": "2.1.39",
+  "description": "foo bar baz",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "main": "dist/server.ts",
+  "type": "module",
+  "enable-source-maps": true,
+  "scripts": {
+    "audit-prod": "npm audit fix --only=prod --audit-level=low",
+    "audit": "npm audit fix --audit-level=low",
+    "build-ts": "tsc",
+    "build": "npm run lint && npm run build-ts",
+    "debug": "npm run build && npm run watch-debug",
+    "lint-docker": "docker run --rm -i hadolint/hadolint < Dockerfile",
+    "lint-ts": "tsc --noEmit && eslint --fix --ext .ts .",
+    "lint": "npm run lint-docker && npm run lint-ts",
+    "prebuild-ts": "rimraf ./dist",
+    "prepack": "npm run build",
+    "serve-debug": "nodemon --inspect ./dist/server.js",
+    "serve": "node ./dist/server.js",
+    "start": "npm run serve",
+    "watch-debug": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold\" \"npm run watch-ts\" \"npm run serve-debug\"",
+    "watch-node": "nodemon ./dist/server.js",
+    "watch-ts": "tsc -w",
+    "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold\" \"npm run watch-ts\" \"npm run watch-node\""
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm audit && npm run lint"
+    }
+  },
+  "devDependencies": {
+    "@tsconfig/node14": "^1.0.0",
+    "@types/express": "^4.17.11",
+    "@types/node": "^14.14.41",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "concurrently": "^6.0.2",
+    "dotenv": "^8.2.0",
+    "eslint": "^7.24.0",
+    "eslint-config-prettier": "^8.2.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "husky": "^6.0.0",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.2.4"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "files": [
+    "/dist",
+    "package.json",
+    "tsconfig.json"
+  ]
+}
