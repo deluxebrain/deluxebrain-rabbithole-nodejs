@@ -7,6 +7,10 @@ ARG VERSION
 
 WORKDIR /tmp/package
 
+# hadolint ignore=DL3018
+RUN apk add --no-cache --virtual .build-deps \
+        curl bash
+
 # hadolint ignore=DL4006
 RUN curl -sfL https://install.goreleaser.com/github.com/tj/node-prune.sh \
   | bash -s -- -b /usr/local/bin
@@ -16,7 +20,8 @@ ADD ${APP_NAME}-${VERSION}.tgz /tmp
 RUN npm install ./ --only=production && \
   npm audit --audit-level=low && \
   npm prune --production && \
-  node-prune
+  node-prune && \
+  apk del .build-deps
 
 FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS release
 ARG APP_NAME
