@@ -26,7 +26,8 @@
     "watch-node": "nodemon ./dist/server.js",
     "watch-ts": "tsc -w",
     "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
-    "scan": "docker run --rm -v \"$(pwd):/proj\" dxa4481/trufflehog --entropy=false file:///proj"
+    "scan": "docker run --rm -v \"$(pwd):/proj\" dxa4481/trufflehog --entropy=false file:///proj",
+    "prepare": "husky install"
   },
   "husky": {
     "hooks": {
