@@ -29,11 +29,6 @@
     "scan": "docker run --rm -v \"$(pwd):/proj\" dxa4481/trufflehog --entropy=false file:///proj",
     "prepare": "husky install"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "console.log('hello')"
-    }
-  },
   "devDependencies": {
     "@tsconfig/node14": "^1.0.0",
     "@types/express": "^4.17.11",
