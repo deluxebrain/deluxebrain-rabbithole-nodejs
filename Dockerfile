@@ -6,11 +6,15 @@ ARG APP_NAME
 ARG VERSION
 
 WORKDIR /tmp/package
+
+RUN curl -sf https://gobinaries.com/tj/node-prune | sh
+
 ADD ${APP_NAME}-${VERSION}.tgz /tmp
 
 RUN npm install ./ --only=production && \
   npm audit --audit-level=low && \
-  npm prune --production
+  npm prune --production && \
+  node-prune
 
 FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS release
 ARG APP_NAME

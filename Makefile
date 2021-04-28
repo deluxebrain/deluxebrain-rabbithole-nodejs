@@ -68,6 +68,8 @@ endif
 	| grep $(APP_NAME) \
 	| xargs docker rmi
 
+audit: audit-image
+
 # k8s
 
 ifndef CLUSTER
