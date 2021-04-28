@@ -25,11 +25,12 @@
     "watch-debug": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold\" \"npm run watch-ts\" \"npm run serve-debug\"",
     "watch-node": "nodemon ./dist/server.js",
     "watch-ts": "tsc -w",
-    "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold\" \"npm run watch-ts\" \"npm run watch-node\""
+    "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
+    "scan": "docker run --rm -v \"$(pwd):/proj\" dxa4481/trufflehog --entropy=false file:///proj"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm audit && npm run lint"
+      "pre-commit": "console.log('hello')"
     }
   },
   "devDependencies": {
@@ -39,6 +40,7 @@
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
     "concurrently": "^6.0.2",
+    "depcheck": "^1.4.0",
     "dotenv": "^8.2.0",
     "eslint": "^7.24.0",
     "eslint-config-prettier": "^8.2.0",
