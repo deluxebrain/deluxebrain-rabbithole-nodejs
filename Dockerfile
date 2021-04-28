@@ -8,7 +8,8 @@ ARG VERSION
 WORKDIR /tmp/package
 
 # hadolint ignore=DL4006
-RUN curl -sf https://gobinaries.com/tj/node-prune | sh
+RUN curl -sfL https://install.goreleaser.com/github.com/tj/node-prune.sh \
+  | bash -s -- -b /usr/local/bin
 
 ADD ${APP_NAME}-${VERSION}.tgz /tmp
 
