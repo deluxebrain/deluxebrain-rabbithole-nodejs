@@ -9,7 +9,8 @@ WORKDIR /tmp/package
 ADD ${APP_NAME}-${VERSION}.tgz /tmp
 
 RUN npm install ./ --only=production && \
-  npm audit --audit-level=low
+  npm audit --audit-level=low && \
+  npm prune --production
 
 FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS release
 ARG APP_NAME
@@ -28,7 +29,8 @@ LABEL org.opencontainers.image.title=${APP_NAME} \
       org.opencontainers.image.vendor="deluxebrain"
 
 WORKDIR /srv
-COPY --from=build /tmp/package/ .
+COPY --from=build /tmp/package/dist ./dist
+COPY --from=build /tmp/package/node_modules ./node_modules
 
 EXPOSE 3000
 ENV HOST 0.0.0.0
